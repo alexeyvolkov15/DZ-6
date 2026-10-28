@@ -1,5 +1,6 @@
 using System;
-using System.Globalization;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 enum Type
 {
@@ -38,6 +39,23 @@ class BankAccount
         Console.WriteLine("Тип счёта: " + type);
     }
 
+    public void Put(int sum)
+    {
+        balance += sum;
+    }
+
+    public void Take(int sum)
+    {
+        if (balance < sum)
+        {
+            Console.WriteLine("Недостаточно средств");
+        }
+        else
+        {
+            balance -= sum;
+        }
+    }
+
     public int Generate()
     {
         count++;
@@ -55,9 +73,18 @@ class Program
     static void Main()
     {
        BankAccount account = new BankAccount();
-
+       
         account.Balance = 500000;
         account.AccountType = Type.Сберегательный;
+
+        Console.WriteLine("Введите сумму чтобы положить:");
+        int sumPlus = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Введите сумму чтобы снять:");
+        int sumMinus = int.Parse(Console.ReadLine());
+
+        account.Put(sumPlus);
+        account.Take(sumMinus);
 
         account.Print();
     }
