@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 enum Type
 {
@@ -8,6 +9,7 @@ enum Type
 
 class BankAccount
 {
+    private static int count = 10000;
     private int number;
     private int balance;
     private Type type;
@@ -15,7 +17,6 @@ class BankAccount
     public int Number
     {
         get { return number; }
-        set { number = value; }
     }
 
     public int Balance
@@ -37,6 +38,17 @@ class BankAccount
         Console.WriteLine("Тип счёта: " + type);
     }
 
+    public int Generate()
+    {
+        count++;
+        return count;
+    }
+
+    public BankAccount()
+    {
+        number = Generate();
+    }
+
 }
 class Program
 {
@@ -44,8 +56,7 @@ class Program
     {
        BankAccount account = new BankAccount();
 
-        account.Number = 12345;
-        account.Balance = 10000;
+        account.Balance = 500000;
         account.AccountType = Type.Сберегательный;
 
         account.Print();
